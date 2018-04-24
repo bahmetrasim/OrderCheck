@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Siparis_Kontrol", "Siparis_Kontrol\Siparis_Kontrol.csproj", "{895A8FD5-A135-4F5E-94EA-945305368951}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{895A8FD5-A135-4F5E-94EA-945305368951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895A8FD5-A135-4F5E-94EA-945305368951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895A8FD5-A135-4F5E-94EA-945305368951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895A8FD5-A135-4F5E-94EA-945305368951}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5EC7D4D8-C2FF-4846-8D7B-D5EB35BA70C4}
+	EndGlobalSection
+EndGlobal
