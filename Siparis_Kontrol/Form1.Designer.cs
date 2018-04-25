@@ -33,16 +33,16 @@
             this.Path = new System.Windows.Forms.TextBox();
             this.epplus = new System.Windows.Forms.Button();
             this.handling = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbpaintwidth = new System.Windows.Forms.TextBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.Termin = new System.Windows.Forms.GroupBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.allorders = new System.Windows.Forms.RadioButton();
             this.backlog = new System.Windows.Forms.RadioButton();
+            this.allorders = new System.Windows.Forms.RadioButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tborderthick = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.NetProductTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +50,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.CALC = new System.Windows.Forms.Button();
             this.AVHours = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbquantity = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbstatus = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbstatusname = new System.Windows.Forms.TextBox();
             this.Termin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,12 +108,12 @@
             this.handling.Text = "Terminsizleri Hariç Tut";
             this.handling.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // tbpaintwidth
             // 
-            this.textBox1.Location = new System.Drawing.Point(557, 130);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(51, 20);
-            this.textBox1.TabIndex = 14;
+            this.tbpaintwidth.Location = new System.Drawing.Point(557, 161);
+            this.tbpaintwidth.Name = "tbpaintwidth";
+            this.tbpaintwidth.Size = new System.Drawing.Size(51, 20);
+            this.tbpaintwidth.TabIndex = 14;
             // 
             // radioButton1
             // 
@@ -144,9 +150,16 @@
             this.Termin.TabStop = false;
             this.Termin.Text = "Termin";
             // 
-            // openFileDialog1
+            // backlog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.backlog.AutoSize = true;
+            this.backlog.Location = new System.Drawing.Point(13, 41);
+            this.backlog.Name = "backlog";
+            this.backlog.Size = new System.Drawing.Size(133, 17);
+            this.backlog.TabIndex = 1;
+            this.backlog.TabStop = true;
+            this.backlog.Text = "Mevcut Ay ve Backlog";
+            this.backlog.UseVisualStyleBackColor = true;
             // 
             // allorders
             // 
@@ -159,22 +172,15 @@
             this.allorders.Text = "Tüm Siparişler";
             this.allorders.UseVisualStyleBackColor = true;
             // 
-            // backlog
+            // openFileDialog1
             // 
-            this.backlog.AutoSize = true;
-            this.backlog.Location = new System.Drawing.Point(13, 41);
-            this.backlog.Name = "backlog";
-            this.backlog.Size = new System.Drawing.Size(133, 17);
-            this.backlog.TabIndex = 1;
-            this.backlog.TabStop = true;
-            this.backlog.Text = "Mevcut Ay ve Backlog";
-            this.backlog.UseVisualStyleBackColor = true;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(453, 133);
+            this.label1.Location = new System.Drawing.Point(453, 164);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 15);
             this.label1.TabIndex = 18;
@@ -184,18 +190,18 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(413, 165);
+            this.label2.Location = new System.Drawing.Point(413, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(138, 15);
             this.label2.TabIndex = 20;
             this.label2.Text = "Sipariş Kalınlığı- Kolonu";
             // 
-            // textBox2
+            // tborderthick
             // 
-            this.textBox2.Location = new System.Drawing.Point(557, 163);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(51, 20);
-            this.textBox2.TabIndex = 19;
+            this.tborderthick.Location = new System.Drawing.Point(557, 133);
+            this.tborderthick.Name = "tborderthick";
+            this.tborderthick.Size = new System.Drawing.Size(51, 20);
+            this.tborderthick.TabIndex = 19;
             // 
             // textBox3
             // 
@@ -260,11 +266,68 @@
             this.AVHours.TabIndex = 27;
             this.AVHours.Text = "Av.Hours Ratio";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label5.Location = new System.Drawing.Point(392, 199);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(163, 15);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Baz Alınacak Miktar - Kolonu";
+            // 
+            // tbquantity
+            // 
+            this.tbquantity.Location = new System.Drawing.Point(557, 198);
+            this.tbquantity.Name = "tbquantity";
+            this.tbquantity.Size = new System.Drawing.Size(51, 20);
+            this.tbquantity.TabIndex = 28;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(412, 231);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(142, 15);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Genel Açıklama - Kolonu";
+            // 
+            // tbstatus
+            // 
+            this.tbstatus.Location = new System.Drawing.Point(557, 230);
+            this.tbstatus.Name = "tbstatus";
+            this.tbstatus.Size = new System.Drawing.Size(51, 20);
+            this.tbstatus.TabIndex = 30;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Location = new System.Drawing.Point(429, 258);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 15);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Filtre Adı";
+            // 
+            // tbstatusname
+            // 
+            this.tbstatusname.Location = new System.Drawing.Point(504, 257);
+            this.tbstatusname.Name = "tbstatusname";
+            this.tbstatusname.Size = new System.Drawing.Size(130, 20);
+            this.tbstatusname.TabIndex = 32;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(646, 306);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.tbstatusname);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.tbstatus);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.tbquantity);
             this.Controls.Add(this.AVHours);
             this.Controls.Add(this.CALC);
             this.Controls.Add(this.label4);
@@ -273,11 +336,11 @@
             this.Controls.Add(this.NetProductTime);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.tborderthick);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Termin);
             this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbpaintwidth);
             this.Controls.Add(this.handling);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.epplus);
@@ -300,7 +363,7 @@
         private System.Windows.Forms.TextBox Path;
         private System.Windows.Forms.Button epplus;
         private System.Windows.Forms.CheckBox handling;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbpaintwidth;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.GroupBox Termin;
@@ -309,7 +372,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tborderthick;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label NetProductTime;
         private System.Windows.Forms.Label label3;
@@ -317,6 +380,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button CALC;
         private System.Windows.Forms.Label AVHours;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbquantity;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbstatus;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tbstatusname;
     }
 }
 

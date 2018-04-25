@@ -24,7 +24,7 @@ namespace Siparis_Kontrol
     class Table
     {
         public Table() { }
-        public double Tablecalc (string pathins, string sheet, int RwCnt, int ClmnCnt, string Rwfld, string Clmnfld)
+        public double Tablecalcqlik (string pathins, string sheet, int RwCnt, int ClmnCnt, string Rwfld, string Clmnfld)
         {
             FileInfo file = new FileInfo(pathins);
             double nethours = 0;
@@ -184,6 +184,169 @@ namespace Siparis_Kontrol
 
                 nethours = double.Parse(wsPivot.Cells[25,11].Value.ToString());
                 
+            }
+            return nethours;
+        }
+
+        public double Tablecalcaubt(string pathins, string sheet, int RwCnt, int ClmnCnt, string Rwfld, string Clmnfld, string datafld)
+        {
+            FileInfo file = new FileInfo(pathins);
+            double nethours = 0;
+
+            using (ExcelPackage pck = new ExcelPackage(file))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets[sheet];
+                var wsPivot = pck.Workbook.Worksheets.Add("PivotTest");
+                var Pvt = wsPivot.PivotTables.Add(wsPivot.Cells[3, 1], ws.Cells[1, 1, RwCnt, ClmnCnt], "Test");
+                Pvt.RowFields.Add(Pvt.Fields[Rwfld]);
+                Pvt.RowFields[Pvt.RowFields.Count - 1].Sort = eSortType.Ascending;
+                Pvt.ColumnFields.Add(Pvt.Fields[Clmnfld]);
+                Pvt.ColumnFields[Pvt.ColumnFields.Count - 1].Sort = eSortType.Ascending;
+                var values = Pvt.DataFields.Add(Pvt.Fields[datafld]);
+                values.Function = DataFieldFunctions.Sum;
+                values.Format = "#.##0";
+                wsPivot.Cells[1,1,12,5].Style.Numberformat.Format = "#.##0";
+
+                wsPivot.Cells[17, 1].Value = "Hız - Referans";
+                wsPivot.Cells[26, 1].Value = "Kalınlık - Referans";
+                wsPivot.Cells[35, 1].Value = "En - Referans";
+                wsPivot.Cells[17, 7].Value = "Net Üretim Zamanı";
+
+                wsPivot.Cells[18, 1].Value = "Group1";
+                wsPivot.Cells[27, 1].Value = "Group1";
+                wsPivot.Cells[36, 1].Value = "Group1";
+                wsPivot.Cells[18, 7].Value = "Group1";
+
+                wsPivot.Cells[19, 1].Value = "Group2";
+                wsPivot.Cells[28, 1].Value = "Group2";
+                wsPivot.Cells[37, 1].Value = "Group2";
+                wsPivot.Cells[19, 7].Value = "Group2";
+
+                wsPivot.Cells[20, 1].Value = "Group3";
+                wsPivot.Cells[29, 1].Value = "Group3";
+                wsPivot.Cells[38, 1].Value = "Group3";
+                wsPivot.Cells[20, 7].Value = "Group3";
+
+                wsPivot.Cells[21, 1].Value = "Group4";
+                wsPivot.Cells[30, 1].Value = "Group4";
+                wsPivot.Cells[39, 1].Value = "Group4";
+                wsPivot.Cells[21, 7].Value = "Group4";
+
+                wsPivot.Cells[22, 1].Value = "Group5";
+                wsPivot.Cells[31, 1].Value = "Group5";
+                wsPivot.Cells[40, 1].Value = "Group5";
+                wsPivot.Cells[22, 7].Value = "Group5";
+
+                wsPivot.Cells[23, 1].Value = "Group6";
+                wsPivot.Cells[32, 1].Value = "Group6";
+                wsPivot.Cells[41, 1].Value = "Group6";
+                wsPivot.Cells[23, 7].Value = "Group6";
+
+                wsPivot.Cells[24, 1].Value = "Group7";
+                wsPivot.Cells[33, 1].Value = "Group7";
+                wsPivot.Cells[42, 1].Value = "Group7";
+                wsPivot.Cells[24, 7].Value = "Group7";
+
+                wsPivot.Cells[17, 2].Value = "Group1";
+                wsPivot.Cells[17, 3].Value = "Group2";
+                wsPivot.Cells[17, 4].Value = "Group3";
+
+                wsPivot.Cells[26, 2].Value = "Group1";
+                wsPivot.Cells[26, 3].Value = "Group2";
+                wsPivot.Cells[26, 4].Value = "Group3";
+
+                wsPivot.Cells[35, 2].Value = "Group1";
+                wsPivot.Cells[35, 3].Value = "Group2";
+                wsPivot.Cells[35, 4].Value = "Group3";
+
+                wsPivot.Cells[17, 8].Value = "Group1";
+                wsPivot.Cells[17, 9].Value = "Group2";
+                wsPivot.Cells[17, 10].Value = "Group3";
+
+                // hız
+                wsPivot.Cells[18, 2, 20, 2].Value = 90;
+                wsPivot.Cells[21, 2, 21, 4].Value = 90;
+                wsPivot.Cells[18, 3, 20, 3].Value = 85;
+                wsPivot.Cells[19, 4, 20, 4].Value = 85;
+                wsPivot.Cells[18, 4].Value = 80;
+                wsPivot.Cells[22, 2].Value = 80;
+                wsPivot.Cells[22, 3].Value = 70;
+                wsPivot.Cells[22, 4].Value = 70;
+                wsPivot.Cells[23, 2, 23, 4].Value = 50;
+                wsPivot.Cells[24, 2, 24, 4].Value = 40;
+
+                // Kalınlık
+                wsPivot.Cells[27, 2].Value = 0.21;
+                wsPivot.Cells[27, 3].Value = 0.20;
+                wsPivot.Cells[27, 4].Value = 0.20;
+                wsPivot.Cells[28, 2].Value = 0.23;
+                wsPivot.Cells[28, 3].Value = 0.25;
+                wsPivot.Cells[28, 4].Value = 0.27;
+                wsPivot.Cells[29, 2, 29, 4].Value = 0.33;
+                wsPivot.Cells[30, 2, 30, 4].Value = 0.50;
+                wsPivot.Cells[31, 2, 31, 4].Value = 0.70;
+                wsPivot.Cells[32, 2, 32, 4].Value = 0.88;
+                wsPivot.Cells[33, 2, 33, 4].Value = 1.6;
+
+                // EN
+                wsPivot.Cells[36, 2, 42, 2].Value = 1000;
+                wsPivot.Cells[36, 3, 42, 3].Value = 1250;
+                wsPivot.Cells[36, 4, 42, 4].Value = 1500;
+
+                // formuller
+                // group1
+                wsPivot.Cells[18, 8].Formula = "B5/2.71/B27/(B36/1000)/B18/60";
+                wsPivot.Cells[19, 8].Formula = "B6/2.71/B28/(B37/1000)/B19/60";
+                wsPivot.Cells[20, 8].Formula = "B7/2.71/B29/(B38/1000)/B20/60";
+                wsPivot.Cells[21, 8].Formula = "B8/2.71/B30/(B39/1000)/B21/60";
+                wsPivot.Cells[22, 8].Formula = "B9/2.71/B31/(B40/1000)/B22/60";
+                wsPivot.Cells[23, 8].Formula = "B10/2.71/B32/(B41/1000)/B23/60";
+                wsPivot.Cells[24, 8].Formula = "B11/2.71/B33/(B42/1000)/B24/60";
+
+                // group2
+                wsPivot.Cells[18, 9].Formula = "C5/2.71/C27/(C36/1000)/C18/60";
+                wsPivot.Cells[19, 9].Formula = "C6/2.71/C28/(C37/1000)/C19/60";
+                wsPivot.Cells[20, 9].Formula = "C7/2.71/C29/(C38/1000)/C20/60";
+                wsPivot.Cells[21, 9].Formula = "C8/2.71/C30/(C39/1000)/C21/60";
+                wsPivot.Cells[22, 9].Formula = "C9/2.71/C31/(C40/1000)/C22/60";
+                wsPivot.Cells[23, 9].Formula = "C10/2.71/C32/(C41/1000)/C23/60";
+                wsPivot.Cells[24, 9].Formula = "C11/2.71/C33/(C42/1000)/C24/60";
+
+                // group3
+
+                wsPivot.Cells[18, 10].Formula = "D5/2.71/D27/(D36/1000)/D18/60";
+                wsPivot.Cells[19, 10].Formula = "D6/2.71/D28/(D37/1000)/D19/60";
+                wsPivot.Cells[20, 10].Formula = "D7/2.71/D29/(D38/1000)/D20/60";
+                wsPivot.Cells[21, 10].Formula = "D8/2.71/D30/(D39/1000)/D21/60";
+                wsPivot.Cells[22, 10].Formula = "D9/2.71/D31/(D40/1000)/D22/60";
+                wsPivot.Cells[23, 10].Formula = "D10/2.71/D32/(D41/1000)/D23/60";
+                wsPivot.Cells[24, 10].Formula = "D11/2.71/D33/(D42/1000)/D24/60";
+                wsPivot.Cells[25, 11].Style.Numberformat.Format = "#.##0";
+                // toplamlar
+                wsPivot.Cells["H25"].Formula = "SUM(H18:H24)";
+                wsPivot.Cells["I25"].Formula = "SUM(I18:I24)";
+                wsPivot.Cells["J25"].Formula = "SUM(J18:J24)";
+                wsPivot.Cells["K25"].Formula = "SUM(H25:J25)";
+                pck.Workbook.Calculate();
+
+                //wsPivot.Cells[25,11].Value = wsPivot.Cells[25,11].Value;
+                //foreach (var cell in wsPivot.Cells.Where(cell => cell.Formula != null))
+                //{
+                //    cell.Value = cell.Value;
+                //}
+
+                wsPivot.Cells[25, 11].Style.Font.SetFromFont(new Font("Tahoma", 10, FontStyle.Bold));
+                wsPivot.Cells[25, 11].Style.Font.Color.SetColor(Color.Black);
+                wsPivot.Cells[25, 11].Style.WrapText = false;
+                wsPivot.Cells[25, 11].Style.VerticalAlignment = ExcelVerticalAlignment.Bottom;
+                wsPivot.Cells[25, 11].Style.HorizontalAlignment = ExcelHorizontalAlignment.General;
+                wsPivot.Cells[25, 11].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                wsPivot.Cells[25, 11].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
+
+                pck.Save();
+
+                nethours = double.Parse(wsPivot.Cells[25, 11].Value.ToString());
+
             }
             return nethours;
         }

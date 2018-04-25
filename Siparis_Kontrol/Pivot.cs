@@ -22,9 +22,10 @@ namespace Siparis_Kontrol
 {
     class Pivot
     {
+        Table tablo = new Table();
         public Pivot() { }
 
-        public double Pivotcalc(string pathins, string sheet, string pathout, bool allorders, bool nodate)
+        public double Pivotcalcqlik(string pathins, string sheet, string pathout, bool allorders, bool nodate)
         {
             FileInfo file = new FileInfo(pathins);
             FileInfo output = new FileInfo(pathout);
@@ -168,7 +169,7 @@ namespace Siparis_Kontrol
                         if (ws.Cells[i, 15].Value == null) { break; }
                         if (ws.Cells[i, 15].Value.ToString() != "Terminsiz")
                         {
-                           value = DateTime.Parse(ws.Cells[i, 15].Value.ToString());
+                            value = DateTime.Parse(ws.Cells[i, 15].Value.ToString());
                         }
                         else
                         {
@@ -183,9 +184,88 @@ namespace Siparis_Kontrol
                 }
                 // Saveas
                 OrderCheck.SaveAs(output);
-                Table tablo = new Table();
-                double nethours = tablo.Tablecalc(pathout, sheet, RowCnt, ColCnt, ws.Cells[1, 8].Value.ToString(), ws.Cells[1, 10].Value.ToString());
+
+                double nethours = tablo.Tablecalcqlik(pathout, sheet, RowCnt, ColCnt, ws.Cells[1, 8].Value.ToString(), ws.Cells[1, 10].Value.ToString());
                 return nethours;
+            }
+        }
+        public double Pivotcalcaubt(string pathins, string sheet, string newsheet, int orderthick, int paintwidth, int quantity, int status, string statusname)
+        {
+            FileInfo file = new FileInfo(pathins);
+
+            using (ExcelPackage OrderCheck = new ExcelPackage(file))
+            {
+
+                ExcelWorksheet wsnew = OrderCheck.Workbook.Worksheets.Copy(sheet, newsheet);
+                OrderCheck.Save();
+                wsnew.InsertColumn(orderthick + 1, 1);
+                wsnew.InsertColumn(paintwidth + 2, 1);
+                wsnew.Cells[1, orderthick + 1].Value = "KGrup";
+                wsnew.Cells[1, paintwidth + 2].Value = "EGrup";
+
+                int ColCnt = wsnew.Dimension.End.Column;
+                int RowCnt = wsnew.Dimension.End.Row;
+                for (int i = 2; i < RowCnt + 1; i++)
+                {
+                    if (wsnew.Cells[i, 1].Value == null) { break; }
+
+                    else if (wsnew.Cells[i, status+2].Value.ToString() != statusname || wsnew.Cells[i, 1].Value.ToString() == "KP Durum")
+                    {
+                        wsnew.DeleteRow(i);
+                        i--;
+                    }
+                }
+                if (wsnew.Cells[2,1].Value.ToString() == "KP Durum")
+                {
+
+                }
+                RowCnt = wsnew.Dimension.End.Row;
+                for (int i = 2; i < RowCnt + 1; i++)
+                {
+                    if (double.Parse(wsnew.Cells[i, orderthick].Value.ToString()) < 0.23)
+                    {
+                        wsnew.Cells[i, orderthick + 1].Value = "Group1";
+                    }
+                    else if (double.Parse(wsnew.Cells[i, orderthick].Value.ToString()) <= 0.30)
+                    {
+                        wsnew.Cells[i, orderthick + 1].Value = "Group2";
+                    }
+                    else if (double.Parse(wsnew.Cells[i, orderthick].Value.ToString()) < 0.45)
+                    {
+                        wsnew.Cells[i, orderthick + 1].Value = "Group3";
+                    }
+                    else if (double.Parse(wsnew.Cells[i, orderthick].Value.ToString()) <= 0.70)
+                    {
+                        wsnew.Cells[i, orderthick + 1].Value = "Group4";
+                    }
+                    else if (double.Parse(wsnew.Cells[i, orderthick].Value.ToString()) < 1)
+                    {
+                        wsnew.Cells[i, orderthick + 1].Value = "Group5";
+                    }
+                    else if (double.Parse(wsnew.Cells[i, orderthick].Value.ToString()) < 1.5)
+                    {
+                        wsnew.Cells[i, orderthick + 1].Value = "Group6";
+                    }
+                    else
+                    {
+                        wsnew.Cells[i, orderthick + 1].Value = "Group7";
+                    }
+                    if (double.Parse(wsnew.Cells[i, paintwidth + 1].Value.ToString()) < 1031)
+                    {
+                        wsnew.Cells[i, paintwidth + 2].Value = "Group1";
+                    }
+                    else if (double.Parse(wsnew.Cells[i, paintwidth + 1].Value.ToString()) < 1271)
+                    {
+                        wsnew.Cells[i, paintwidth + 2].Value = "Group2";
+                    }
+                    else
+                    {
+                        wsnew.Cells[i, paintwidth + 2].Value = "Group3";
+                    }
+                }
+                OrderCheck.Save();
+                double nethours = tablo.Tablecalcaubt (pathins, newsheet, RowCnt, ColCnt, wsnew.Cells[1, orderthick+1].Value.ToString(), wsnew.Cells[1, paintwidth+2].Value.ToString(), wsnew.Cells[1,quantity+2].Value.ToString());
+                return 0;
             }
         }
     }
